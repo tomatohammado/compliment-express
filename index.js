@@ -27,7 +27,6 @@ app.get('/', (request, response) => {
   let name = 'User'
 
   response.render('index', {compliment, color, name})
-  // response.send(`Hello User!<br>${compliments[Math.floor(Math.random() * compliments.length)]}<style>body {background-color: ${colors[Math.floor(Math.random() * colors.length)]}`)
 })
 
 app.get('/:name', (request, response) => {
@@ -36,12 +35,15 @@ app.get('/:name', (request, response) => {
   let name = request.params.name
 
   response.render('index', {compliment, color, name})
-  // response.send(`Hello ${request.params.name}!<br>${compliments[Math.floor(Math.random() * compliments.length)]}<style> body {background-color: ${colors[Math.floor(Math.random() * colors.length)]}}</style>`)
 })
 
-// app.post('/', (request, response) => {
-//   response.send()
-// })
+app.post('/', (request, response) => {
+  compliments.push(request.body.input_compliment)
+})
+
+app.post('/:name', (request, response) => {
+  compliments.push(request.body.input_compliment)
+})
 
 app.listen('4000', () => {
   console.log('app is on port 4000')
