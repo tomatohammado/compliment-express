@@ -14,15 +14,29 @@ let colors = [
 ]
 
 const express = require('express')
+const bodyParser = require('body-parser')
+
 const app = express()
+app.set('view engine', 'hbs')
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (request, response) => {
-  response.send(`Hello User!<br>${compliments[Math.floor(Math.random() * compliments.length)]}<style>body {background-color: ${colors[Math.floor(Math.random() * colors.length)]}`)
+  let compliment = compliments[Math.floor(Math.random() * compliments.length)]
+  let color = colors[Math.floor(Math.random() * colors.length)]
+  let name = 'User'
+
+  response.render('index', {compliment, color, name})
+  // response.send(`Hello User!<br>${compliments[Math.floor(Math.random() * compliments.length)]}<style>body {background-color: ${colors[Math.floor(Math.random() * colors.length)]}`)
 })
 
 app.get('/:name', (request, response) => {
-  response.send(`Hello ${request.params.name}!<br>${compliments[Math.floor(Math.random() * compliments.length)]}<style> body {background-color: ${colors[Math.floor(Math.random() * colors.length)]}}</style>`)
+  // response.send(`Hello ${request.params.name}!<br>${compliments[Math.floor(Math.random() * compliments.length)]}<style> body {background-color: ${colors[Math.floor(Math.random() * colors.length)]}}</style>`)
 })
+
+// app.post('/', (request, response) => {
+//   response.send()
+// })
 
 app.listen('4000', () => {
   console.log('app is on port 4000')
