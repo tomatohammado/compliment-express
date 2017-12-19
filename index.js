@@ -39,10 +39,12 @@ app.get('/:name', (request, response) => {
 
 app.post('/', (request, response) => {
   compliments.push(request.body.input_compliment)
+  console.log(compliments)
 })
 
 app.post('/:name', (request, response) => {
   compliments.push(request.body.input_compliment)
+  console.log(compliments)
 })
 
 app.listen('4000', () => {
