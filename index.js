@@ -31,6 +31,11 @@ app.get('/', (request, response) => {
 })
 
 app.get('/:name', (request, response) => {
+  let compliment = compliments[Math.floor(Math.random() * compliments.length)]
+  let color = colors[Math.floor(Math.random() * colors.length)]
+  let name = request.params.name
+
+  response.render('index', {compliment, color, name})
   // response.send(`Hello ${request.params.name}!<br>${compliments[Math.floor(Math.random() * compliments.length)]}<style> body {background-color: ${colors[Math.floor(Math.random() * colors.length)]}}</style>`)
 })
 
